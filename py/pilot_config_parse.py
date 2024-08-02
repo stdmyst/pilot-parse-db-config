@@ -12,9 +12,9 @@ def parsing_xml(tree):
     
     for sub_tree in tree.contents:
         if isinstance(sub_tree, ProcessingInstruction):
-            result["ProcessingInstruction"] = str(sub_tree)
+            pass
         elif isinstance(sub_tree, Doctype):
-            result["Doctype"] = str(sub_tree)
+            pass
         else:
            if str(sub_tree) != "\n":
                 if isinstance(sub_tree, NavigableString):
@@ -61,8 +61,8 @@ def main():
     
     if (bs4_obj := get_soup(url)):
         result = parsing_xml(bs4_obj)
-        with open(f"files/result.txt", "w+", encoding="UTF-8") as f:
-            f.write(str(result))
+        #  with open(f"files/result.txt", "w+", encoding="UTF-8") as f:
+        #      f.write(str(result))
         
         with open(f"files/{url.split("/")[-1]}.json", "w+", encoding="UTF-8") as f:
             json.dump(result, f, ensure_ascii=False, indent=2)

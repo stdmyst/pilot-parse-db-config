@@ -45,9 +45,12 @@ def main():
     parsed_soup = parsing_xml(soup)
     name = input("Enter name of type: ")
     element_id = get_id_by_name(parsed_soup, name)
-
-    with open(f"files/{name}_tree_{url.split("/")[-1]}.json", "w", encoding="UTF-8") as f:
-        json.dump({name: search_children(parsed_soup, element_id)}, f, ensure_ascii=False, indent=4)
+    
+    if element_id:
+        with open(f"files/{name}_tree_{url.split("/")[-1]}.json", "w", encoding="UTF-8") as f:
+            json.dump({name: search_children(parsed_soup, element_id)}, f, ensure_ascii=False, indent=4)
+    else:
+        print("Invalid name!")
 
 
 if __name__ == "__main__":
